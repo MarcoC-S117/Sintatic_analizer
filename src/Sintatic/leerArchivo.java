@@ -17,7 +17,7 @@ public class leerArchivo {
     }
 
     public void leer() {
-        String nombreFichero = "src/archivo.txt";
+        String nombreFichero = "src/tokens.txt";
         FileReader fr = null;
         try {
             fr = new FileReader(nombreFichero);
@@ -75,12 +75,12 @@ public class leerArchivo {
                             }
                             siguienteCaract = fr.read();
                         }
-                    } else {
+                    } else if(caract!=-1){
                         cadena = cadena + (char) caract;
                         cadena = cadena + (char) siguienteCaract;
                         caract = siguienteCaract;
                     }
-                } else if (caract != ' ' && caract != '\r' && caract != '\n' && caract != '\t') {
+                } else if (caract != ' ' && caract != '\r' && caract != '\n' && caract != '\t' && caract!=-1) {
                     cadena = cadena + (char) caract;
                 }
                 caract = fr.read();
