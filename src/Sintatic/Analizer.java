@@ -11,27 +11,51 @@ public class Analizer {
 	}
 
 	public boolean S() {
-		boolean valid = false;
-		if (currentIndex < input.length() && input.charAt(currentIndex) == 'a') {
-			currentIndex++;
-			if (B()) {
-				valid = false;
-				if (currentIndex < input.length() && input.charAt(currentIndex) == '*') {
-					valid = true;
-					currentIndex++;
-				}
-			} else {
-				valid = S();
-			}
-		}
-		return valid;
+	    boolean valid = false;
+	    System.out.println(input.charAt(currentIndex));
+	    if (currentIndex < input.length() && (input.charAt(currentIndex) == 'a' || input.charAt(currentIndex) == 'b')) {
+	    	if (B()) {
+	            valid = false;
+	            currentIndex++;
+	            if (currentIndex < input.length() && input.charAt(currentIndex) == '°') {	        
+	                valid = true;	            
+	            }
+	        } else {
+	        	currentIndex++;
+	            valid = S();
+	        }
+	        
+	        
+	    } else if (currentIndex < input.length() && input.charAt(currentIndex) == '(') {
+	        currentIndex++;
+	        if (input.charAt(currentIndex) == 'a') {
+	            currentIndex++;
+	            if (currentIndex < input.length() && input.charAt(currentIndex) == ')') {
+	            	currentIndex++;
+	                valid=S();
+	            } else {
+	                valid = false;
+	                
+	            }
+	        } else {
+	            valid = false;
+	        }
+	    } else if (currentIndex < input.length() && (input.charAt(currentIndex) == '*' || input.charAt(currentIndex) == '+')) {
+	        if(input.charAt(currentIndex+1) != '*' && input.charAt(currentIndex+1) != '+' && input.charAt(currentIndex+1) != '(' && input.charAt(currentIndex+1) != ')') {
+	        	currentIndex++;
+		        valid = S();
+	        }
+	    }
+	    
+	    return valid;
 	}
+
+
 
 	public boolean B() {
 		boolean valid = false;
-		if (currentIndex < input.length() && input.charAt(currentIndex) == 'b') {
+		if (input.charAt(currentIndex) == 'b') {
 			valid = true;
-			currentIndex++;
 		}
 		return valid;
 	}
@@ -39,7 +63,7 @@ public class Analizer {
 	public void syntaxError() {
 		System.out.println("Syntax error at:");
 		System.out.println(input);
-		for (int i = 0; i < currentIndex; i++) {
+		for (int i = 0; i <= currentIndex; i++) {
 			System.out.print(" ");
 		}
 		System.out.println("^");

@@ -1,17 +1,16 @@
 package Sintatic;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Main {
 
 	public static void main(String[] args) {
 		//analize with lexical the file to search valid expressions
-		String[] p1 = { "String", "Token", "Lexema", "Valor", "Linea" };
 		String cadena;
 		int posicion;
 		leerArchivo texto = new leerArchivo();
 		String Tok = "";
+		@SuppressWarnings("unused")
 		String valor = null;
 		String validString = "";
 		texto.leer();
@@ -31,14 +30,12 @@ public class Main {
 					System.out.println("Operador encontrado en la linea " + posicion + " del archivo.");
 					Tok = "Operador";
 					valor = "Operador";
-					String[] p11 = { cadena, Tok, cadena, valor, String.valueOf(posicion) };
 					validString += cadena;
 
 				} else if (cadena.equals("(") || cadena.equals(")")) {
 					System.out.println("Separador encontrado en la linea " + posicion + " del archivo.");
 					Tok = "Separador";
 					valor = "Separador";
-					String[] p11 = { cadena, Tok, cadena, valor, String.valueOf(posicion) };
 					validString += cadena;
 
 				} else if (automata_DFA_3_2.process(cadena) || automata_DFA_3_3.process(cadena)
@@ -86,8 +83,6 @@ public class Main {
 						System.out.println("The string is accepted by all three FAs.");
 					}
 					System.out.println("El valor decimal es: " + binaryToDecimal(cadena));
-
-					String[] p11 = { cadena, Tok, cadena, valor, String.valueOf(posicion) };
 					validString += Tok;
 				}
 				if (!(automata_DFA_3_2.process(cadena) || automata_DFA_3_3.process(cadena)
@@ -95,8 +90,7 @@ public class Main {
 						&& !(cadena.equals("*") || cadena.equals("+"))) {
 					System.out.println("The string is not accepted by any FA.");
 					Tok = "Not valid String";
-					valor = null;
-					String[] p11 = { cadena, Tok, cadena, valor, String.valueOf(posicion) };
+					valor = null;					
 				}
 			}
 			System.out.println(
@@ -104,7 +98,7 @@ public class Main {
 		}
 		
 		//add final symbol to String with valid tokens
-		validString += "*";
+		validString += "°";
 		System.out.println(validString);
 		//analize with Sintatic the string 
 		Analizer parser = new Analizer(validString);
