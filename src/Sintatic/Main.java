@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Main {
 
 	public static void main(String[] args) {
-		//analize with lexical the file to search valid expressions
+		// analize with lexical the file to search valid expressions
 		String cadena;
 		int posicion;
 		leerArchivo texto = new leerArchivo();
@@ -44,7 +44,7 @@ public class Main {
 					if (automata_DFA_3_2.process(cadena)) {
 						Tok = "a";
 						valor = String.valueOf(binaryToDecimal(cadena));
-						System.out.println("FA_Begin_0_End_1: " + automata_DFA_3_2.getTransitions());
+						System.out.println(Tok + ":" + automata_DFA_3_2.getTransitions());
 						System.out.println("Final state: {q" + automata_DFA_3_2.estado() + "}");
 						System.out.println();
 					}
@@ -52,14 +52,14 @@ public class Main {
 					if (automata_DFA_3_3.process(cadena)) {
 						Tok = "b";
 						valor = null;
-						System.out.println("FA_End_11: " + automata_DFA_3_3.getTransitions());
+						System.out.println(Tok + ":" + automata_DFA_3_3.getTransitions());
 						System.out.println("Final state: {q" + automata_DFA_3_2.estado() + "}");
 						System.out.println();
 					}
 					if (automata_DFA_3_4.process(cadena)) {
 						Tok = "c";
 						valor = null;
-						System.out.println("FA_11: " + automata_DFA_3_4.getTransitions());
+						System.out.println(Tok + ":" + automata_DFA_3_4.getTransitions());
 						System.out.println("Final state: {q" + automata_DFA_3_4.estado() + "}");
 						System.out.println();
 					}
@@ -90,17 +90,17 @@ public class Main {
 						&& !(cadena.equals("*") || cadena.equals("+"))) {
 					System.out.println("The string is not accepted by any FA.");
 					Tok = "Not valid String";
-					valor = null;					
+					valor = null;
 				}
 			}
 			System.out.println(
 					"--------------------------------------------------------------------------------------------------------------------------------------");
 		}
-		
-		//add final symbol to String with valid tokens
+
+		// add final symbol to String with valid tokens
 		validString += "°";
 		System.out.println(validString);
-		//analize with Sintatic the string 
+		// analize with Sintatic the string
 		Analizer parser = new Analizer(validString);
 		if (parser.S()) {
 			System.out.println("The string \"" + validString + "\" belongs to the grammar (language).");
